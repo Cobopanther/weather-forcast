@@ -1,107 +1,76 @@
-import tkinter as tk
-from tkinter import messagebox
-import requests
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.ensemble import RandomForestRegressor
+import joblib
 from datetime import datetime
 
-# --------------------------
-# Constants
-# --------------------------
-API_KEY = '5f98b57ecbfe412fe86149a3c60e15d9'
-BASE_URL = 'https://api.openweathermap.org/data/2.5/'
+# ✅ Load dataset
+df = pd.read_csv("kerala weather.csv")
 
-# --------------------------
-# Weather Fetch Function
-# --------------------------
-def get_weather(city):
-    try:
-        url = f'{BASE_URL}weather?q={city}&appid={API_KEY}&units=metric'
-        response = requests.get(url)
-        data = response.json()
+# ✅ Clean and prepare data
+df['datetime'] = pd.to_datetime(df['datetime'], errors='coerce')
+columns_to_drop = ['name', 'sunrise', 'sunset', 'description', 'icon', 'stations']
+df = df.drop(columns=columns_to_drop, errors='ignore')
+df = df.dropna(subset=['temp', 'tempmax', 'tempmin', 'humidity', 'windspeed', 'precip', 'conditions', 'datetime'])
 
-        if response.status_code != 200:
-            raise Exception(data.get("message", "Failed to get weather"))
+# ✅ Feature engineering
+df['year'] = df['datetime'].dt.year
+df['month'] = df['datetime'].dt.month
+df['day'] = df['datetime'].dt.day
+df['dayofweek'] = df['datetime'].dt.dayofweek
 
-        now = datetime.now()
-        time_str = now.strftime("%I:%M %p")  # 12-hour format
-        date_str = now.strftime("%A, %d %B %Y")  # e.g., Tuesday, 02 July 2025
+# ✅ Encode weather condition and rain
+label_encoder = LabelEncoder()
+df['conditions_encoded'] = label_encoder.fit_transform(df['conditions'].astype(str))
+df['will_rain'] = df['conditions'].str.contains('Rain', case=False).astype(int)
 
-        # Precipitation info (optional; not always in response)
-        precipitation = "N/A"
-        if "rain" in data and "1h" in data["rain"]:
-            precipitation = f"{data['rain']['1h'] * 100:.0f}%"
+# ✅ Features and targets
+X = df[['year', 'month', 'day', 'dayofweek']]
+y = df[['temp', 'tempmax', 'tempmin', 'humidity', 'windspeed', 'precip', 'conditions_encoded', 'will_rain']]
 
-        return {
-            'city': data['name'],
-            'country': data['sys']['country'],
-            'temperature': round(data['main']['temp']),
-            'feels_like': round(data['main']['feels_like']),
-            'min_temp': round(data['main']['temp_min']),
-            'max_temp': round(data['main']['temp_max']),
-            'humidity': data['main']['humidity'],
-            'wind_speed': round(data['wind']['speed'] * 3.6, 1),  # m/s to km/h
-            'description': data['weather'][0]['description'].title(),
-            'precipitation': precipitation,
-            'date': date_str,
-            'time': time_str
-        }
-    except Exception as e:
-        return {'error': str(e)}
+# ✅ Train-test split and model training
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, random_state=42))
+model.fit(X_train, y_train)
 
-# --------------------------
-# UI Function
-# --------------------------
-def show_weather():
-    city = city_entry.get()
-    if not city:
-        messagebox.showwarning("Input Required", "Please enter a city name.")
-        return
+# ✅ Save model and encoder
+joblib.dump(model, "weather_model.pkl")
+joblib.dump(label_encoder, "label_encoder.pkl")
 
-    weather = get_weather(city)
+# ✅ Load and Predict
+model = joblib.load("weather_model.pkl")
+label_encoder = joblib.load("label_encoder.pkl")
 
-    if 'error' in weather:
-        messagebox.showerror("Error", weather['error'])
-    else:
-        result_text.set(
-            f"{weather['date']}  |  {weather['time']}\n\n"
-            f"📍 City: {weather['city']}, {weather['country']}\n"
-            f"🌤️ Weather: {weather['description']}\n"
-            f"🌡️ Temperature: {weather['temperature']}°C\n"
-            f"🤒 Feels Like: {weather['feels_like']}°C\n"
-            f"🔻 Min Temp: {weather['min_temp']}°C\n"
-            f"🔺 Max Temp: {weather['max_temp']}°C\n"
-            f"💧 Humidity: {weather['humidity']}%\n"
-            f"💦 Precipitation (1h): {weather['precipitation']}\n"
-            f"🌬️ Wind Speed: {weather['wind_speed']} km/h"
-        )
+# ✅ Ask for user input
+date_str = input("📅 Enter a date (DD-MM-YYYY): ")
 
-# --------------------------
-# Tkinter UI
-# --------------------------
-root = tk.Tk()
-root.title("Weather Forecasting System")
-root.geometry("430x500")
-root.resizable(False, False)
+try:
+    input_date = datetime.strptime(date_str, "%d-%m-%Y")
+    input_features = pd.DataFrame([{
+        'year': input_date.year,
+        'month': input_date.month,
+        'day': input_date.day,
+        'dayofweek': input_date.weekday()
+    }])
 
-# Fonts & Styling
-title_font = ("Helvetica", 16, "bold")
-label_font = ("Helvetica", 12)
+    # Predict
+    prediction = model.predict(input_features)[0]
+    condition_decoded = label_encoder.inverse_transform([int(round(prediction[6]))])[0]
+    will_rain = "Yes" if round(prediction[7]) == 1 else "No"
 
-# Title Label
-tk.Label(root, text="Weather Forecast", font=title_font).pack(pady=10)
+    # Output
+    print(f"\n📊 Predicted Weather for {input_date.strftime('%d-%m-%Y')}")
+    print(f"🌡 Temperature: {prediction[0]:.2f} °C")
+    print(f"🌡 Max Temp: {prediction[1]:.2f} °C")
+    print(f"🌡 Min Temp: {prediction[2]:.2f} °C")
+    print(f"💧 Humidity: {prediction[3]:.2f} %")
+    print(f"🌬 Windspeed: {prediction[4]:.2f} km/h")
+    print(f"🌧 Precipitation: {prediction[5]:.2f} mm")
+    print(f"🌥 Condition: {condition_decoded}")
+    print(f"☔ Will it Rain?: {will_rain}")
 
-# City Input
-tk.Label(root, text="Enter City:", font=label_font).pack()
-city_entry = tk.Entry(root, font=label_font, justify='center')
-city_entry.pack(pady=5)
-
-# Search Button
-search_btn = tk.Button(root, text="Get Weather", font=label_font, command=show_weather)
-search_btn.pack(pady=10)
-
-# Weather Result Display
-result_text = tk.StringVar()
-result_label = tk.Label(root, textvariable=result_text, font=label_font, justify='left', wraplength=400)
-result_label.pack(pady=10)
-
-# Run the app
-root.mainloop()
+except ValueError:
+    print("❌ Invalid date format. Please use DD-MM-YYYY (e.g., 15-08-2025).")
