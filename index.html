@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>We Weather</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <video autoplay muted loop id="bgVideo">
-    <source src="videos\partlycloudy.mp4" type="video/mp4">
+    <source src="{{ url_for('static', filename='videos/partlycloudy.mp4') }}" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
@@ -29,7 +30,7 @@
     <div class="left-info">
       <div class="location-date">
         <div id="location" class="location">
-          <img src="images\placeholder.png" class="location-icon" alt="location icon">
+          <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="location-icon" alt="location icon">
           <span id="locationText">Current Location</span>
         </div>
         <div id="date">date</div>
@@ -37,7 +38,7 @@
       </div>
       <div id="temperature" class="temperature">--°C</div>
       <div id="description" class="description">
-        <img id="weatherIcon" src="images/cloudy.png" class="cloud-icon" alt="cloud">
+        <img id="weatherIcon" src="{{ url_for('static', filename='images/cloudy.png') }}" class="cloud-icon" alt="cloud">
         <span id="descriptionText">--</span>
       </div>
     </div>
@@ -52,6 +53,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
