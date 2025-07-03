@@ -1,0 +1,38 @@
+<!-- predict.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predict Weather</title>
+  <link rel="stylesheet" href="predict.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Weather Prediction</h1>
+    <form method="POST">
+      <label for="date">Select Date:</label>
+      <input type="date" name="date" required>
+      <button type="submit">🔍 Predict</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result">
+        <h2>Predicted Weather for {{ prediction.date }}</h2>
+        <ul>
+          <li><strong>Temperature:</strong> {{ prediction.temp }} °C</li>
+          <li><strong>Max Temp:</strong> {{ prediction.tempmax }} °C</li>
+          <li><strong>Min Temp:</strong> {{ prediction.tempmin }} °C</li>
+          <li><strong>Humidity:</strong> {{ prediction.humidity }} %</li>
+          <li><strong>Windspeed:</strong> {{ prediction.windspeed }} km/h</li>
+          <li><strong>Precipitation:</strong> {{ prediction.precip }} mm</li>
+          <li><strong>Condition:</strong> {{ prediction.condition }}</li>
+          <li><strong>Will it Rain?</strong> {{ prediction.will_rain }}</li>
+        </ul>
+      </div>
+    {% elif error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>
