@@ -30,15 +30,17 @@ function fetchWeather(url) {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      const now = new Date();
+      const nowUTC = new Date();
+      const utcTime = nowUTC.getTime() + (nowUTC.getTimezoneOffset() * 60000);
+      const cityTime = new Date(utcTime + (data.timezone * 1000));
       document.getElementById("locationText").textContent = `${data.name}, ${data.sys.country}`;
-      document.getElementById("date").textContent = now.toLocaleDateString('en-US', {
+      document.getElementById("date").textContent = cityTime.toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       });
-      document.getElementById("time").textContent = now.toLocaleTimeString('en-US');
+      document.getElementById("time").textContent = cityTime.toLocaleTimeString('en-US');
       document.getElementById("temperature").textContent = `${Math.round(data.main.temp)}°C`;
 
       const description = data.weather[0].description;
@@ -63,11 +65,11 @@ function fetchWeather(url) {
       const desc = description.toLowerCase();
       let videoPath = "/videos/clear.mp4";
       if (desc.includes("overcast") || desc.includes("partly")) {
-        videoPath = "/videos/partlycloudy.mp4";
+        videoPath = "static/videos/partlycloudy.mp4";
       } else if (desc.includes("cloud")) {
-        videoPath = "/videos/cloudy.mp4";
+        videoPath = "static//videos/partlycloudy.mp4";
       } else if (desc.includes("rain")) {
-        videoPath = "/videos/rain.mp4";
+        videoPath = "static/videos/rain.mp4";
       } else if (desc.includes("snow")) {
         videoPath = "/videos/snow.mp4";
       } else if (desc.includes("clear")) {

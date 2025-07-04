@@ -1,0 +1,346 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%) !important;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: transparent;
+}
+
+/* Header */
+.glassy-header {
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 1.2rem;
+  filter: drop-shadow(0 4px 12px #6a82fb80);
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #ff9500;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #fff8;
+}
+
+.header-location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.header-location .location-icon {
+  width: 1.2em;
+  height: 1.2em;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+/* Dashboard Navigation */
+.dashboard-nav {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+}
+
+.dashboard-nav .nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-nav .nav-btn {
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-nav .nav-btn:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6), 0 0 25px rgba(0, 150, 255, 0.4);
+  transform: translateY(-2px);
+  
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.search-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Background Video */
+#bgVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.05);
+  width: 95vw;
+  height: 95vh;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 1;
+  pointer-events: none;
+  filter: brightness(0.8) blur(2px);
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  color: aqua;
+}
+
+#searchInput {
+  padding: 14px 24px;
+  width: 320px;
+  font-size: 17px;
+  border: 2px solid #00eaff;
+  border-radius: 30px;
+  outline: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: #3da8cc;
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6), 0 0 25px rgba(0, 150, 255, 0.4);
+  backdrop-filter: blur(6px);
+  transition: all 0.4s ease;
+}
+
+#searchInput::placeholder {
+  color: #bdefff;
+  font-style: italic;
+}
+
+#searchInput:focus {
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 35px rgba(0, 200, 255, 0.6);
+  border-color: #00f0ff;
+}
+
+#suggestions {
+  position: absolute;
+  top: 55px;
+  background: rgba(0, 102, 142, 0.9);
+  color: white;
+  padding-inline: 10px;
+  border: 1px solid #00d9f5;
+  border-radius: 15px;
+  width: 320px;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0 0 10px #00d9f5, 0 0 20px #00bfff;
+  z-index: 1000;
+  font-size: 15px;
+}
+
+#suggestions div {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s;
+}
+
+#suggestions div:last-child {
+  border-bottom: none;
+}
+
+#suggestions div:hover {
+  background-color: rgba(0, 200, 255, 0.2);
+}
+
+/* Weather Container */
+.weather-container {
+  display: flex;
+  padding: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  color: #f5f5f5;
+  font-size: 16px;
+  justify-content: space-between;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  transition: box-shadow 0.2s, background 0.3s;
+}
+
+.weather-container:hover {
+  box-shadow: 0 16px 48px 0 rgba(31,38,135,0.37);
+  background: rgba(255,255,255,0.28);
+}
+
+.left-info {
+  width: 300px;
+}
+
+.location-date > div {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.temperature {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.cloud-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.right-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+  padding-left: 30px;
+}
+
+.row {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.location-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+/* Predict Button */
+.predict-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.predict-btn {
+  border: 2px solid #00d9f5;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #00d9f5;
+  font-weight: bold;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 8px;
+}
+
+.predict-btn:hover {
+  background-color: #00d9f5;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .glassy-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .dashboard-nav .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .weather-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .right-info {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  #searchInput {
+    width: 280px;
+  }
+}

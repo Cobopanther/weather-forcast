@@ -4,55 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>We Weather</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
   <video autoplay muted loop id="bgVideo">
-    <source src="{{ url_for('static', filename='videos/partlycloudy.mp4') }}" type="video/mp4">
+    <source src="static/videos/partlycloudy.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
-  <h1 class="fancy-title">WEATHER FORECAST</h1>
-
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔵 search city..." oninput="getSuggestions(this.value)">
-    <div id="suggestions"></div>
-  </div>
-
-  <nav>
-    <div class="nav-links">
-      <a href="predict.html" class="btn nav-btn">Predict Weather</a>
-      <a href="about.html" class="btn nav-btn">About Us</a>
-    </div>
-  </nav>
-
-  <div class="weather-container">
-    <div class="left-info">
-      <div class="location-date">
-        <div id="location" class="location">
-          <img src="{{ url_for('static', filename='images/placeholder.png') }}" class="location-icon" alt="location icon">
-          <span id="locationText">Current Location</span>
+  <div class="dashboard-container">
+    <div class="header glassy-header">
+      <div class="header-left">
+        <img src="static/images/cloudy.png" alt="Logo" class="header-logo">
+        <div class="header-info">
+          <h1>Weather Forecast</h1>
+          
         </div>
-        <div id="date">date</div>
-        <div id="time">time</div>
       </div>
-      <div id="temperature" class="temperature">--°C</div>
-      <div id="description" class="description">
-        <img id="weatherIcon" src="{{ url_for('static', filename='images/cloudy.png') }}" class="cloud-icon" alt="cloud">
-        <span id="descriptionText">--</span>
-      </div>
+      <nav class="dashboard-nav">
+        <div class="nav-links">
+          <a href="" class="btn nav-btn">Home</a>
+          <a href="http://127.0.0.1:5000" class="btn nav-btn">Predict Weather</a>
+          <a href="about.html" class="btn nav-btn">About Us</a>
+        </div>
+      </nav>
     </div>
 
-    <div class="right-info">
-      <div class="row"><strong>Feels Like</strong><div id="feels_like">--°C</div></div>
-      <div class="row"><strong>Humidity</strong><div id="humidity">--%</div></div>
-      <div class="row"><strong>Min Temp</strong><div id="min_temp">--°C</div></div>
-      <div class="row"><strong>Max Temp</strong><div id="max_temp">--°C</div></div>
-      <div class="row"><strong>Wind Speed</strong><div id="wind_speed">-- km/h</div></div>
-      <div class="row"><strong>Wind Direction</strong><div id="wind_direction">--</div></div>
+    <div class="main-content">
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="🔵 search city..." oninput="getSuggestions(this.value)">
+          <div id="suggestions"></div>
+        </div>
+      </div>
+
+      <div class="weather-container">
+        <div class="left-info">
+          <div class="location-date">
+            <div id="location" class="location">
+              <img src="static/images/placeholder.png" class="location-icon" alt="location icon">
+              <span id="locationText">Current Location</span>
+            </div>
+            <div id="date">date</div>
+            <div id="time">time</div>
+          </div>
+          <div id="temperature" class="temperature">--°C</div>
+          <div id="description" class="description">
+            <img id="weatherIcon" src="static/images/cloudy.png" class="cloud-icon" alt="cloud">
+            <span id="descriptionText">--</span>
+          </div>
+        </div>
+
+        <div class="right-info">
+          <div class="row"><strong>Feels Like</strong><div id="feels_like">--°C</div></div>
+          <div class="row"><strong>Humidity</strong><div id="humidity">--%</div></div>
+          <div class="row"><strong>Min Temp</strong><div id="min_temp">--°C</div></div>
+          <div class="row"><strong>Max Temp</strong><div id="max_temp">--°C</div></div>
+          <div class="row"><strong>Wind Speed</strong><div id="wind_speed">-- km/h</div></div>
+          <div class="row"><strong>Wind Direction</strong><div id="wind_direction">--</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="script.js"></script>
 </body>
 </html>

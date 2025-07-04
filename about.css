@@ -1,0 +1,297 @@
+h1, h2, h3, h4, h5, h6{
+    text-shadow: 0.5px 0.5px 8px white; 
+    color: white;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.section{
+  z-index: 100;
+}
+/* NAVBAR */
+
+/* Navigation Bar Styles */
+nav {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 10;
+}
+
+.nav-links {
+  display: flex;
+}
+
+nav .nav-btn {
+  color: #d97000;
+  margin-right: 50px;
+  border: #fa7f03 2px solid;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  text-shadow: 0.5px 0.5px 9px rgb(148, 25, 25);
+  text-decoration: none;
+}
+
+nav .nav-btn:hover {
+  text-shadow: 0.5px 0.5px 9px rgb(236, 201, 6);
+  color: #ffffff;
+  background-color: coral;
+}
+
+.navbar a {
+  color: #fff;
+  margin-right: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-shadow: 0.5px 0.5px 9px white;
+}
+
+nav .logo img {
+  max-width: 150px;
+}
+
+.navbar-expand-lg {
+  padding: 10px;
+}
+
+.container {
+    z-index: 100;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .col-lg-4 {
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    z-index: 200;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    border: none;
+    background-color: inherit;
+}
+
+.card .face {
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    backface-visibility: hidden;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    /* border-right: 1px solid #999;
+border-bottom: 1px solid #999; */
+}
+
+.card .face.front-face,
+.card .face.back-face {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .face.front-face .profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card .face.front-face .name {
+    letter-spacing: 2px;
+}
+
+.card .face.front-face .designation {
+    font-size: 0.8rem;
+    color: #ddd;
+    letter-spacing: 0.8px;
+}
+
+.card:hover .face.front-face {
+    transform: rotateY(180deg);
+}
+
+.card .face.back-face {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.06);
+    transform: rotateY(180deg);
+    padding: 20px 30px;
+    text-align: center;
+    user-select: none;
+}
+
+.card .face.back-face .fa-quote-left {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    font-size: 1.2rem;
+}
+
+.card .face.back-face .fa-quote-right {
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    font-size: 1.2rem;
+}
+
+.card:hover .face.back-face {
+    transform: rotateY(360deg);
+}
+
+@media(max-width: 991.5px) {
+
+    .earth h1{
+        text-align: center;
+        margin: 40px 0;
+    }
+
+    .col-lg-3 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: transparent;
+  z-index: 100;
+}
+
+/* Header */
+.glassy-header {
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 1.2rem;
+  filter: drop-shadow(0 4px 12px #6a82fb80);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #6a82fb;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #fff8;
+}
+
+/* Dashboard Navigation */
+.dashboard-nav {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+}
+
+.dashboard-nav .nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-nav .nav-btn {
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-nav .nav-btn:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 100;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .glassy-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .dashboard-nav .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+
+
+
