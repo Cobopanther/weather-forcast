@@ -48,10 +48,12 @@ function fetchWeather(url) {
 
       // Set weather icon
       let iconSrc = "/images/cloudy.png";
-      if (description.includes("rain")) iconSrc = "/images/rain.png";
-      else if (description.includes("clear")) iconSrc = "/images/clear.png";
-      else if (description.includes("snow")) iconSrc = "/images/snow.png";
-      else if (description.includes("cloud")) iconSrc = "/images/cloudy.png";
+      if (description.includes("rain")) iconSrc = "/static/images/rain.png";
+      else if (description.includes("overcast")) iconSrc = "/static/images/cloudy.png";
+      else if (description.includes("clear")) iconSrc = "/static/images/clear.png";
+      else if (description.includes("snow")) iconSrc = "/static/images/snow.png";
+      else if (description.includes("thunder")) iconSrc = "/static/images/thunder.png";
+      else if (description.includes("cloud")) iconSrc = "/static/images/cloudy.png";
       document.getElementById("weatherIcon").src = iconSrc;
 
       document.getElementById("feels_like").textContent = `${Math.round(data.main.feels_like)}°C`;
@@ -63,24 +65,30 @@ function fetchWeather(url) {
 
       // Background video
       const desc = description.toLowerCase();
-      let videoPath = "/videos/clear.mp4";
-      if (desc.includes("overcast") || desc.includes("partly")) {
+      let videoPath = "static/videos/CLEAR.mp4"; // Default video
+      
+      if (desc.includes("rain") || desc.includes("drizzle")) {
+        videoPath = "static/videos/RAINY.mp4";
+      } else if (desc.includes("snow") || desc.includes("sleet")) {
+        videoPath = "static/videos/SNOWY.mp4";
+      } else if (desc.includes("storm") || desc.includes("thunder") || desc.includes("lightning")) {
+        videoPath = "static/videos/STORMY.mp4";
+      } else if (desc.includes("cloud") || desc.includes("overcast") || desc.includes("partly")) {
         videoPath = "static/videos/partlycloudy.mp4";
-      } else if (desc.includes("cloud")) {
-        videoPath = "static//videos/partlycloudy.mp4";
-      } else if (desc.includes("rain")) {
-        videoPath = "static/videos/rain.mp4";
-      } else if (desc.includes("snow")) {
-        videoPath = "/videos/snow.mp4";
-      } else if (desc.includes("clear")) {
-        videoPath = "/videos/clear.mp4";
+      } else if (desc.includes("fog") || desc.includes("mist") || desc.includes("haze")) {
+        videoPath = "static/videos/FOGGY.mp4";
+      } else if (desc.includes("wind") || desc.includes("breeze")) {
+        videoPath = "static/videos/WINDY.mp4";
+      } else if (desc.includes("clear") || desc.includes("sunny")) {
+        videoPath = "static/videos/SUNNY.mp4";
       }
 
       const video = document.getElementById("bgVideo");
       const videoSource = video.querySelector("source");
-      if (!videoSource.src.includes(videoPath)) {
+      if (videoSource.src !== window.location.origin + "/" + videoPath) {
         videoSource.src = videoPath;
         video.load();
+        video.play().catch(e => console.log("Video autoplay failed:", e));
       }
     })
     .catch(err => {

@@ -80,7 +80,7 @@
               {% elif 'cloud' in prediction.condition|lower %}
                 <img src="{{ url_for('static', filename='images/cloudy.png') }}" alt="Cloudy">
               {% else %}
-                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Weather">
+                <img src="{{ url_for('static', filename='images/clear.png') }}" alt="Weather">
               {% endif %}
             </div>
             <h2 style="text-align:center; margin-bottom:1.5rem;">Predicted Weather for {{ prediction.date }}</h2>
