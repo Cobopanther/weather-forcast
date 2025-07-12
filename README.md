@@ -1,94 +1,135 @@
-# Weather Forecast Dashboard 🌦️
 
-A modern, interactive web dashboard for predicting and visualizing weather in Kerala, India. Powered by a machine learning model trained on historical weather data, this app provides daily and 7-day forecasts with beautiful charts, dark/light mode, and a responsive UI.
+# 🌤️ Kerala Weather Forecast Dashboard
 
----
-
-## 🚀 Features
-- **ML-powered weather prediction** for any date
-- **7-day forecast** with interactive line chart
-- **Modern, glassmorphism UI** with dark/light mode toggle
-- **Summary cards** for key stats (temperature, humidity, rain)
-- **Responsive design** for desktop and mobile
-- **Beautiful tables and charts** (Chart.js)
-- **No large files in repo** (see below)
+An interactive web application to **predict and visualize daily and 7-day weather forecasts** for Kerala, India. Powered by a **machine learning model** trained on historical weather data, this dashboard features modern UI design with responsive charts, dark/light mode, and insightful weather summaries.
 
 ---
 
-## 🗂️ Project Structure
+## 📌 Features
+
+- 🔮 **ML-powered weather prediction** for custom dates
+- 📅 **7-day forecast** with an interactive line chart
+- 🌗 **Light and dark mode toggle** with glassmorphism styling
+- 📊 **Summary cards** for temperature, humidity, rain, etc.
+- 📱 **Responsive design** for desktop and mobile
+- 📈 **Beautiful charts and tables** using Chart.js
+- 🚫 **No large model files in repo** — generate or download as needed
+
+---
+
+## 🧭 Project Structure
+
 ```
 weather-forcast/
-├── static/
-│   ├── images/           # Weather icons
-│   ├── predict.css       # Main CSS (light/dark, glassmorphism)
+├── static/                 # CSS, icons, and assets
+│   ├── images/
+│   ├── predict.css
 │   └── ...
-├── templates/
-│   └── predict.html      # Main dashboard template
-├── kerala weather.csv    # Your weather data (not in repo)
-├── weather.py            # Flask web app (run this to start dashboard)
-├── test.py               # Model training script (run this first)
-├── weather_model.pkl     # Trained model (not in repo)
-├── label_encoder.pkl     # Label encoder (not in repo)
-├── .gitignore            # Ignores large files
-├── README.md             # This file
-└── ...
+├── templates/              # HTML template
+│   └── predict.html
+├── kerala weather.csv      # Weather data (add your dataset)
+├── weather.py              # Flask web app (run this to start)
+├── test.py                 # Model training script (run this first)
+├── weather_model.pkl       # Trained model (generated)
+├── label_encoder.pkl       # Encoded weather labels (generated)
+├── requirements.txt        # Python dependencies
+├── .gitignore              # Ignore large/model files
+└── README.md               # This file
 ```
 
 ---
 
-## ⚡ Quick Start
+## 🚀 Quick Start Guide
 
-### 1. Clone the repo
+### 📥 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Cobopanther/weather-forcast.git
 cd weather-forcast
 ```
 
-### 2. Install dependencies
+### 📦 2. Install Requirements
+
+Install the necessary Python packages:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Prepare your data
-- Place your historical weather data as `kerala weather.csv` in the project root.
+### 📁 3. Add Your Dataset
 
-### 4. Train the model (**must do this first!**)
+Place your historical weather data CSV file in the project root as:
+
+```
+kerala weather.csv
+```
+
+### 🧠 4. Train the Model (Do This First!)
+
+Run the model training script:
+
 ```bash
 python test.py
 ```
-- This will generate `weather_model.pkl` and `label_encoder.pkl` in your project folder.
 
-### 5. Run the web dashboard
+This generates the following files:
+- `weather_model.pkl`
+
+> ⚠️ These files are not included in the repository — you must generate them.
+
+### 🌐 5. Run the Dashboard
+
+Start the Flask web application:
+
 ```bash
 python weather.py
 ```
-- Open your browser at [http://localhost:5000](http://localhost:5000)
+
+Then, open your browser and go to:
+```
+http://localhost:5000
+```
 
 ---
 
-## 📝 Notes
-- **Model files (`weather_model.pkl`, `label_encoder.pkl`) are NOT in the repo** (too large for GitHub). You must train or download them yourself.
-- To ignore large files, see `.gitignore`.
-- For deployment, upload model files to a cloud storage and download on server start.
+## 🛠 Tech Stack
+
+| Layer     | Tech                         |
+|-----------|------------------------------|
+| Backend   | Python, Flask, scikit-learn  |
+| ML Model  | RandomForestRegressor        |
+| Frontend  | HTML, CSS, Chart.js, Jinja2  |
+| Styling   | Custom CSS with glassmorphism |
 
 ---
 
-## 🛠️ Tech Stack
-- **Backend:** Python, Flask, scikit-learn, joblib
-- **Frontend:** HTML, CSS (custom, glassmorphism), Chart.js, Jinja2
-- **ML Model:** RandomForestRegressor (multi-output)
+## 📌 Notes
+
+- `weather_model.pkl` and `label_encoder.pkl` are generated during training. These files are **too large for GitHub** and are excluded via `.gitignore`.
+- For production deployment, consider uploading model files to a cloud storage and loading them dynamically.
 
 ---
 
 ## 🖼️ Screenshots
-> _Add your screenshots here!_
+
+<img width="1919" height="865" alt="image" src="https://github.com/user-attachments/assets/7ed5a49e-81b2-48bf-86cd-3c7c5814eaef" />
+<img width="1919" height="876" alt="Screenshot 2025-07-12 222419" src="https://github.com/user-attachments/assets/36f747db-7bc3-4d7e-891e-f035f58972df" />
+<img width="1919" height="932" alt="image" src="https://github.com/user-attachments/assets/1724189c-a91c-4ea0-a34d-8f4f66a4f4b0" />
+<img width="1919" height="852" alt="image" src="https://github.com/user-attachments/assets/025fb3f8-09d5-4c10-a878-32d45eadabf1" />
+
+
+
 
 ---
 
 ## 🤝 Contributing
-Pull requests and suggestions are welcome! For major changes, please open an issue first.
+
+Contributions are welcome! Please:
+- Open an issue for bugs or feature requests.
+- Submit a pull request with improvements or fixes.
 
 ---
 
-## 📄 License
-MIT
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
