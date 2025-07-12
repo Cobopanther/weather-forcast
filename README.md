@@ -112,6 +112,8 @@ http://localhost:5000
 
 ## 🖼️ Screenshots
 
+<img width="1919" height="861" alt="image" src="https://github.com/user-attachments/assets/1161ca5c-6f50-4bf6-b486-5a1861b31294" />
+<img width="1919" height="867" alt="image" src="https://github.com/user-attachments/assets/1350c28e-3d20-4698-b513-7282000008bc" />
 <img width="1919" height="865" alt="image" src="https://github.com/user-attachments/assets/7ed5a49e-81b2-48bf-86cd-3c7c5814eaef" />
 <img width="1919" height="876" alt="Screenshot 2025-07-12 222419" src="https://github.com/user-attachments/assets/36f747db-7bc3-4d7e-891e-f035f58972df" />
 <img width="1919" height="932" alt="image" src="https://github.com/user-attachments/assets/1724189c-a91c-4ea0-a34d-8f4f66a4f4b0" />
