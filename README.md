@@ -61,7 +61,7 @@ pip install -r requirements.txt
 Place your historical weather data CSV file in the project root as:
 
 ```
-kerala weather.csv
+kollam weather.csv
 ```
 
 ### 🧠 4. Train the Model (Do This First!)
