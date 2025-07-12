@@ -51,31 +51,31 @@ function fetchWeather(url) {
       document.getElementById("descriptionText").textContent = description;
 
       // Default icons/videos
-      let iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/cloudy.png?v=1751742480366";
-      let videoPath = "https://cdn.glitch.me/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/SUNNY.mp4?v=1751742638071";
+      let iconSrc = "static/images/cloudy.png";
+      let videoPath = "static/videos/SUNNY.mp4";
 
       // Match weather condition
       if (description.includes("rain") || description.includes("drizzle")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/rain.png?v=1751742520528";
-        videoPath = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/RAINY.mp4?v=1751742617687";
+        iconSrc = "static/images/rain.png";
+        videoPath = "static/videos/RAINY.mp4";
       } else if (description.includes("snow") || description.includes("sleet")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/snowflake.png?v=1751742528068";
-        videoPath = "https://cdn.glitch.me/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/SNOWY.mp4?v=1751742626515";
+        iconSrc = "static/images/snowflake.png";
+        videoPath = "static/videos/SNOWY.mp4";
       } else if (description.includes("storm") || description.includes("thunder") || description.includes("lightning")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/storm.png?v=1751742541416";
-        videoPath = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/STORMY.mp4?v=1751742628791";
+        iconSrc = "static/images/storm.png";
+        videoPath = "static/videos/STORMY.mp4";
       } else if (description.includes("cloud") || description.includes("overcast") || description.includes("partly")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/cloudy.png?v=1751742480366";
-        videoPath = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/partlycloudy.mp4?v=1751742609358";
+        iconSrc = "static/images/cloudy.png";
+        videoPath = "static/videos/partlycloudy.mp4";
       } else if (description.includes("fog") || description.includes("mist") || description.includes("haze")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/weather.png?v=1751742543079";
-        videoPath = "https://cdn.glitch.me/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/FOGGY.mp4?v=1751742592130";
+        iconSrc = "static/images/weather.png";
+        videoPath = "static/videos/FOGGY.mp4";
       } else if (description.includes("wind") || description.includes("breeze")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/wind.png?v=1751742550209";
-        videoPath = "https://cdn.glitch.me/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/WINDY.mp4?v=1751742641887";
+        iconSrc = "static/images/wind.png";
+        videoPath = "static/videos/WINDY.mp4";
       } else if (description.includes("clear") || description.includes("sunny")) {
-        iconSrc = "https://cdn.glitch.global/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/clear.png?v=1751742438838";
-        videoPath = "https://cdn.glitch.me/517a8df1-8c85-4fbe-91e3-5aee2e9d516e/SUNNY.mp4?v=1751742638071";
+        iconSrc = "static/images/clear.png";
+        videoPath = "static/videos/SUNNY.mp4";
       }
 
       document.getElementById("weatherIcon").src = iconSrc;
