@@ -4,6 +4,8 @@
 An interactive web application to **predict and visualize daily and 7-day weather forecasts** for Kerala, India. Powered by a **machine learning model** trained on historical weather data, this dashboard features modern UI design with responsive charts, dark/light mode, and insightful weather summaries.
 
 ---
+screenshots and working example : https://drive.google.com/drive/folders/156KsDsZai7DjynkgwFrCyuRTDf3dHTEd?usp=sharing
+---
 
 ## 📌 Features
 
